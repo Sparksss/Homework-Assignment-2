@@ -44,7 +44,6 @@ var server = http.createServer(function(req, res){
     req.on('end', function() {
         buffer += decoder.end();
 
-        
         // Choose the handler this request should go to. If one is not found, use the notFound 
         var choosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
@@ -59,7 +58,7 @@ var server = http.createServer(function(req, res){
         };
 
 
-        choosenHandler(data, function(statusCode, payload){
+        choosenHandler(data, function(statusCode, payload) {
        
 
         statusCode = typeof(statusCode) == 'number' ? statusCode: 200;
@@ -82,7 +81,7 @@ var server = http.createServer(function(req, res){
 });
 
 
-server.listen(3000, function(){
+server.listen(config.httpPort, function(){
     console.log("The server is listening on port 3000 on localhost");
 });
 
@@ -92,5 +91,7 @@ var router = {
     'ping': handlers.ping,
     'users': handlers.users,
     'tokens': handlers.tokens,
-    'checks': handlers.checks
+    'checks': handlers.checks,
+    'shoppingcart': handlers.shoppingcart,
+    'showmenu': handlers.showmenu
 };
